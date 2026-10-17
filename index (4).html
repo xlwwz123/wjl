@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>未来能源发展 - 电气工程导论结课报告</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Microsoft YaHei', 'PingFang SC', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.8; color: #333;
+            background: #f0f2f5;
+        }
+        .navbar {
+            background: rgba(255,255,255,0.98);
+            padding: 12px 0; position: fixed; width: 100%; top: 0; z-index: 1000;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .nav-container {
+            max-width: 1200px; margin: 0 auto; padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 22px; font-weight: bold; color: #1a5276; text-decoration: none; }
+        .logo span { color: #2e86c1; }
+        .nav-links { display: flex; gap: 25px; list-style: none; }
+        .nav-links a { text-decoration: none; color: #555; font-weight: 500; font-size: 14px; transition: color 0.3s; }
+        .nav-links a:hover { color: #2e86c1; }
+        
+        .hero {
+            background: linear-gradient(135deg, #1a5276 0%, #2e86c1 60%, #1abc9c 100%);
+            color: white; padding: 140px 20px 80px; text-align: center;
+        }
+        .hero h1 { font-size: 48px; margin-bottom: 15px; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
+        .hero p { font-size: 18px; opacity: 0.95; max-width: 600px; margin: 0 auto 25px; }
+        .hero-badge {
+            display: inline-block; background: rgba(255,255,255,0.2);
+            padding: 6px 18px; border-radius: 20px; font-size: 13px; margin-bottom: 15px;
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section {
+            background: white; margin: 30px 0; padding: 45px;
+            border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .section-title {
+            font-size: 28px; color: #1a5276; margin-bottom: 25px;
+            padding-bottom: 12px; border-bottom: 3px solid #2e86c1;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .section-title::before {
+            content: ''; width: 6px; height: 32px; background: #2e86c1; border-radius: 3px;
+        }
+        .section p { margin-bottom: 12px; font-size: 15px; color: #555; }
+        
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; margin-top: 25px; }
+        .card {
+            background: #fff; border-radius: 10px; padding: 25px;
+            border: 1px solid #e1e8ed; transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.08); }
+        .card-icon { font-size: 36px; margin-bottom: 12px; }
+        .card h3 { font-size: 20px; color: #1a5276; margin-bottom: 12px; }
+        .card p { color: #666; font-size: 14px; }
+        .card ul { margin-top: 12px; padding-left: 18px; }
+        .card ul li { margin-bottom: 6px; color: #555; font-size: 14px; }
+        
+        .video-section { background: #f8f9fa; padding: 30px; border-radius: 10px; margin-top: 25px; }
+        .video-section h3 { margin-bottom: 15px; color: #1a5276; font-size: 18px; }
+        .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 25px; margin-top: 15px; }
+        .video-wrapper {
+            position: relative; padding-bottom: 56.25%; height: 0;
+            overflow: hidden; border-radius: 8px; box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+            background: #000;
+        }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-caption { margin-top: 8px; font-size: 13px; color: #666; text-align: center; }
+        
+        .timeline { position: relative; padding-left: 25px; margin-top: 25px; }
+        .timeline::before {
+            content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+            width: 3px; background: linear-gradient(to bottom, #2e86c1, #1abc9c); border-radius: 3px;
+        }
+        .timeline-item { position: relative; margin-bottom: 25px; padding-left: 18px; }
+        .timeline-item::before {
+            content: ''; position: absolute; left: -31px; top: 5px;
+            width: 12px; height: 12px; background: #2e86c1; border-radius: 50%;
+            border: 2px solid white; box-shadow: 0 0 0 2px #2e86c1;
+        }
+        .timeline-item h4 { color: #1a5276; margin-bottom: 6px; font-size: 17px; }
+        .timeline-item p { color: #666; font-size: 14px; }
+        
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin: 25px 0; }
+        .stat-card {
+            background: linear-gradient(135deg, #2e86c1 0%, #1abc9c 100%);
+            color: white; padding: 20px; border-radius: 10px; text-align: center;
+        }
+        .stat-number { font-size: 32px; font-weight: bold; display: block; margin-bottom: 4px; }
+        .stat-label { font-size: 13px; opacity: 0.9; }
+        
+        .table-wrapper { overflow-x: auto; margin-top: 18px; }
+        table { width: 100%; border-collapse: collapse; background: white; border-radius: 8px; overflow: hidden; }
+        th { background: #1a5276; color: white; padding: 12px 15px; text-align: left; font-weight: 600; font-size: 14px; }
+        td { padding: 10px 15px; border-bottom: 1px solid #e1e8ed; font-size: 14px; }
+        tr:hover { background: #f8f9fa; }
+        
+        .tip-box {
+            margin-top: 25px; padding: 18px; background: #fff8e1;
+            border-radius: 8px; border-left: 4px solid #ffc107;
+        }
+        .tip-box p { margin: 0; color: #856404; font-size: 14px; }
+        
+        .footer {
+            background: #1a5276; color: white; text-align: center;
+            padding: 35px 20px; margin-top: 50px;
+        }
+        .footer p { opacity: 0.8; font-size: 14px; }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .section { padding: 25px 18px; }
+            .nav-links { display: none; }
+            .video-grid { grid-template-columns: 1fr; }
+            .card-grid { grid-template-columns: 1fr; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(25px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate { animation: fadeInUp 0.6s ease-out; }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <a href="#" class="logo">未来<span>能源</span>发展</a>
+        <ul class="nav-links">
+            <li><a href="#background">研究背景</a></li>
+            <li><a href="#tech">技术维度</a></li>
+            <li><a href="#grid">电网维度</a></li>
+            <li><a href="#industry">产业维度</a></li>
+            <li><a href="#society">社会维度</a></li>
+            <li><a href="#video">视频资料</a></li>
+            <li><a href="#summary">总结启示</a></li>
+        </ul>
+    </div>
+</nav>
+
+<header class="hero">
+    <div class="hero-content animate">
+        <div class="hero-badge">电气工程导论 · 结课报告</div>
+        <h1>未来能源发展</h1>
+        <p>探索清洁能源的革命之路 —— 从光伏风电到智能电网，从储能氢料到双碳目标</p>
+    </div>
+</header>
+
+<div class="container">
+
+    <!-- 研究背景 -->
+    <section id="background" class="section animate">
+        <h2 class="section-title">研究背景</h2>
+        <p>全球气候变化与能源危机日益严峻，传统化石能源的不可持续性问题愈发突出。根据国际能源署（IEA）数据，全球能源相关碳排放已接近370亿吨/年，其中电力行业占比超过40%。在此背景下，世界各国纷纷提出碳中和目标，推动能源结构转型。</p>
+        <p>中国明确提出"2030年前碳达峰、2060年前碳中和"的"双碳"目标，将新能源发展提升至国家战略高度。截至2025年，中国可再生能源装机容量已突破14亿千瓦，占全国发电总装机的半数以上，其中风电、光伏装机容量均居全球第一。</p>
+        <p>本课题从电气工程的专业视角出发，围绕未来能源发展的技术、电网、产业、社会四个维度展开深入研究，探讨电气工程技术在能源转型中的核心作用。</p>
+        
+        <div class="stats-grid">
+            <div class="stat-card"><span class="stat-number">14亿+</span><span class="stat-label">中国可再生能源装机（千瓦）</span></div>
+            <div class="stat-card"><span class="stat-number">2030</span><span class="stat-label">碳达峰目标年份</span></div>
+            <div class="stat-card"><span class="stat-number">2060</span><span class="stat-label">碳中和目标年份</span></div>
+            <div class="stat-card"><span class="stat-number">40%+</span><span class="stat-label">可再生能源占发电装机比重</span></div>
+        </div>
+    </section>
+
+    <!-- 技术维度 -->
+    <section id="tech" class="section animate">
+        <h2 class="section-title">技术维度：主流能源形式的电气转化</h2>
+        <p>未来能源体系的核心在于将自然界中的可再生能源高效转化为电能，并通过核心电气设备实现电能的质量控制和稳定输出。</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#9728;</div>
+                <h3>光伏发电</h3>
+                <p>光伏效应是光伏发电的物理基础：当光子照射到半导体PN结上时，能量足够的光子将电子从价带激发到导带，产生电子-空穴对，在内建电场作用下分别向N区和P区移动，形成直流电。</p>
+                <ul>
+                    <li><strong>核心设备：</strong>光伏电池片（单晶硅/多晶硅/薄膜）、逆变器（DC-AC转换）、汇流箱、支架系统</li>
+                    <li><strong>转换效率：</strong>实验室单晶硅效率突破26%，商用组件效率达20-22%</li>
+                    <li><strong>发展趋势：</strong>钙钛矿叠层电池、双面组件、BIPV建筑一体化</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#127760;</div>
+                <h3>风力发电</h3>
+                <p>风力发电基于电磁感应原理：风能推动风机叶片旋转（伯努利原理），通过齿轮箱增速后驱动发电机转子旋转，磁场切割定子线圈产生交流电，经变流器整流逆变后并入电网。</p>
+                <ul>
+                    <li><strong>核心设备：</strong>风机叶片（碳纤维复合材料）、齿轮箱、发电机（双馈/永磁直驱）、变流器、偏航系统</li>
+                    <li><strong>单机容量：</strong>海上风机已突破16MW，单机年发电量可达8000万度</li>
+                    <li><strong>发展趋势：</strong>漂浮式海上风电、大型化、智能化运维</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9889;</div>
+                <h3>储能技术</h3>
+                <p>储能是解决新能源间歇性问题的关键。电化学储能通过电化学反应存储电能（如锂电池的锂离子嵌入/脱出），抽水蓄能利用势能转换（丰水期抽水蓄能、枯水期放水发电），氢能储能通过电解水制氢实现长时储能。</p>
+                <ul>
+                    <li><strong>电化学储能：</strong>锂离子电池（磷酸铁锂/三元锂）、液流电池、钠离子电池</li>
+                    <li><strong>物理储能：</strong>抽水蓄能（占全球储能90%+）、压缩空气储能、飞轮储能</li>
+                    <li><strong>核心设备：</strong>电池管理系统（BMS）、储能变流器（PCS）、能量管理系统（EMS）</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128167;</div>
+                <h3>氢能与燃料电池</h3>
+                <p>氢能被称为"终极清洁能源"。电解水制氢（2H₂O → 2H₂ + O₂）使用绿电时全过程零排放。燃料电池通过氢氧电化学反应直接发电（效率可达60%以上），产物仅为水。</p>
+                <ul>
+                    <li><strong>制氢方式：</strong>电解水（绿氢）、天然气重整（灰氢/蓝氢）、生物质制氢</li>
+                    <li><strong>燃料电池类型：</strong>质子交换膜燃料电池（PEMFC）、固体氧化物燃料电池（SOFC）</li>
+                    <li><strong>应用场景：</strong>氢燃料电池汽车、工业原料、长时储能、航空航运</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 电网维度 -->
+    <section id="grid" class="section animate">
+        <h2 class="section-title">电网维度：智能电网与分布式能源并网</h2>
+        <p>随着新能源大规模接入，传统"源随荷动"的单向供电模式已无法适应。新型电力系统需要实现"源网荷储"协同互动，构建高度智能化的电网架构。</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#9875;</div>
+                <h3>智能电网架构</h3>
+                <p>智能电网是在传统电网基础上融合现代通信技术、自动控制技术和物联网技术形成的新型电网系统。其核心特征包括：</p>
+                <ul>
+                    <li><strong>自愈能力：</strong>故障自动定位、隔离和恢复供电，减少停电范围和时长</li>
+                    <li><strong>互动互动：</strong>发电侧与用电侧实时信息交互，实现供需动态平衡</li>
+                    <li><strong>兼容接入：</strong>支持分布式电源、储能、电动汽车等多元资源即插即用</li>
+                    <li><strong>高级可视化：</strong>基于数字孪生技术的电网全景监控与仿真预测</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9729;</div>
+                <h3>分布式能源并网</h3>
+                <p>分布式能源（DER）指分布在用户侧的小型发电设施（屋顶光伏、小型风电、热电联产等）。其并网面临的核心挑战包括：</p>
+                <ul>
+                    <li><strong>功率波动性：</strong>风光出力的随机性和间歇性对电网频率稳定构成挑战</li>
+                    <li><strong>电能质量问题：</strong>逆变器并网引入谐波、电压暂降等电能质量问题</li>
+                    <li><strong>保护配合：</strong>分布式电源接入改变传统电网潮流方向，需重新整定保护装置</li>
+                    <li><strong>并网标准：</strong>需满足GB/T 19964等并网技术规范要求</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#9878;</div>
+                <h3>虚拟电厂</h3>
+                <p>虚拟电厂（VPP）不是实体电厂，而是通过物联网和AI技术，将分散的分布式电源、储能、可控负荷聚合起来，统一调度参与电力市场交易的智能管理系统。</p>
+                <ul>
+                    <li><strong>技术架构：</strong>物联网感知层 + 通信网络层 + 平台决策层 + 执行控制层</li>
+                    <li><strong>核心功能：</strong>负荷聚合、功率预测、优化调度、市场交易</li>
+                    <li><strong>典型案例：</strong>江苏200MW虚拟电厂项目，响应速度从秒级提升至毫秒级</li>
+                    <li><strong>未来前景：</strong>聚合分布式光伏、储能、充电桩、智能家居等多元资源</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 产业维度 -->
+    <section id="industry" class="section animate">
+        <h2 class="section-title">产业维度：能源电气装备产业升级</h2>
+        <p>能源转型推动了整个电气装备产业链的深刻变革。从上游的材料研发到中游的装备制造，再到下游的运营服务，全产业链正在经历从"跟跑"到"领跑"的跨越式发展。</p>
+        
+        <div class="timeline">
+            <div class="timeline-item">
+                <h4>光伏产业：从成本下降到技术引领</h4>
+                <p>过去十年，光伏度电成本下降超过80%，成为全球最便宜的电力来源之一。中国光伏产业在全球市场份额超过80%，从多晶硅料到硅片、电池片、组件全产业链具备绝对竞争优势。N型TOPCon、HJT、钙钛矿等新技术路线竞相突破，推动转换效率持续攀升。</p>
+            </div>
+            <div class="timeline-item">
+                <h4>风电产业：大型化与海上化</h4>
+                <p>陆上风电已进入平价上网时代，海上风电成为新增长极。单机容量从早期的2MW提升至16MW以上，深远海漂浮式风电技术加速突破。中国海上风电装机容量已位居全球前列，产业链国产化率超过95%。</p>
+            </div>
+            <div class="timeline-item">
+                <h4>储能产业：规模化商用加速</h4>
+                <p>截至2025年，中国新型储能装机容量突破1亿千瓦，较"十三五"末增长超30倍，规模占全球四成以上。锂离子电池主导当前市场，钠离子电池、液流电池等新技术路线加速产业化。储能系统集成成本持续下降，光储一体化、风储一体化项目大规模落地。</p>
+            </div>
+            <div class="timeline-item">
+                <h4>氢能产业：从示范到商业化</h4>
+                <p>中国已建成可再生能源制氢项目约100个，年产能20多万吨。氢燃料电池汽车在公交、物流等领域开展示范运营。绿氢在工业脱碳（炼钢、化工）、重型交通、长时储能等场景的应用前景广阔，被视为实现深度脱碳的关键路径。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 社会维度 -->
+    <section id="society" class="section animate">
+        <h2 class="section-title">社会维度：双碳目标与居民用电变革</h2>
+        <p>能源转型不仅是技术问题，更是深刻的社会变革。它关乎国家能源安全、产业竞争力、生态环境和每个人的日常生活。</p>
+        
+        <div class="card-grid">
+            <div class="card">
+                <div class="card-icon">&#127794;</div>
+                <h3>"双碳"目标的战略意义</h3>
+                <p>"碳达峰、碳中和"是中国对国际社会的庄严承诺，也是推动高质量发展的内在要求。电力行业作为碳排放重点领域，其清洁化转型是实现双碳目标的关键。</p>
+                <ul>
+                    <li><strong>能源结构重塑：</strong>非化石能源占一次能源消费比重目标2030年达25%左右</li>
+                    <li><strong>产业机遇：</strong>据测算，碳中和目标将带动年均数万亿级的绿色投资</li>
+                    <li><strong>国际竞争：</strong>新能源技术已成为大国科技竞争的战略制高点</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#127960;</div>
+                <h3>居民用电模式变革</h3>
+                <p>新型电力系统正在深刻改变居民的用电方式和能源消费模式：</p>
+                <ul>
+                    <li><strong>屋顶光伏+储能：</strong>家庭从单纯用电者变为"产消者"（Prosumer），自发自用、余电上网</li>
+                    <li><strong>电动汽车V2G：</strong>电动汽车不仅是交通工具，还可作为移动储能单元向电网反向送电</li>
+                    <li><strong>智能用电：</strong>智能电表+用电APP实现用电可视化，AI推荐最优用电方案</li>
+                    <li><strong>分时电价：</strong>峰谷电价差拉大，引导用户削峰填谷，降低用能成本</li>
+                </ul>
+            </div>
+            <div class="card">
+                <div class="card-icon">&#128737;</div>
+                <h3>电气安全保障</h3>
+                <p>高比例新能源接入对电力系统安全提出新要求：</p>
+                <ul>
+                    <li><strong>频率稳定：</strong>新能源替代同步发电机后，系统惯量下降，频率抗干扰能力减弱</li>
+                    <li><strong>电压支撑：</strong>电力电子设备主导的电网缺乏天然电压支撑能力</li>
+                    <li><strong>黑启动能力：</strong>极端情况下系统恢复供电的能力需要重新规划</li>
+                    <li><strong>网络安全：</strong>数字化电网面临网络攻击威胁，需建立纵深防御体系</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- 视频资料 -->
+    <section id="video" class="section animate">
+        <h2 class="section-title">视频资料</h2>
+        <p>以下视频资料涵盖了本课题涉及的核心知识点，包括储能技术、光伏技术、智能电网、氢能等主题。点击下方卡片即可在B站观看相关视频。</p>
+        
+        <div class="video-grid" style="margin-top: 20px;">
+            <div>
+                <a href="https://search.bilibili.com/all?keyword=储能技术 新能源 科普" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                    <div class="card" style="border-left: 4px solid #2e86c1;">
+                        <div class="card-icon">&#9889;</div>
+                        <h3>储能技术科普</h3>
+                        <p>了解储能的工作原理、技术类型（锂电池、液流电池、抽水蓄能等）及其在新能源体系中的关键作用。</p>
+                        <p style="color:#2e86c1; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://search.bilibili.com/all?keyword=光伏发电原理 太阳能 科普" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                    <div class="card" style="border-left: 4px solid #1abc9c;">
+                        <div class="card-icon">&#9728;</div>
+                        <h3>光伏发电原理</h3>
+                        <p>探索太阳能如何转化为电能，了解光伏电池的工作原理、转换效率及行业发展趋势。</p>
+                        <p style="color:#1abc9c; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://search.bilibili.com/all?keyword=智能电网 新能源并网 科普" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                    <div class="card" style="border-left: 4px solid #f39c12;">
+                        <div class="card-icon">&#9875;</div>
+                        <h3>智能电网与新能源并网</h3>
+                        <p>了解智能电网架构、分布式能源并网技术、虚拟电厂等新型电力系统核心概念。</p>
+                        <p style="color:#f39c12; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                    </div>
+                </a>
+            </div>
+            <div>
+                <a href="https://search.bilibili.com/all?keyword=氢能 燃料电池 新能源 科普" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                    <div class="card" style="border-left: 4px solid #e74c3c;">
+                        <div class="card-icon">&#128167;</div>
+                        <h3>氢能与燃料电池</h3>
+                        <p>认识"终极清洁能源"氢能，了解燃料电池工作原理、绿氢制备及氢能应用场景。</p>
+                        <p style="color:#e74c3c; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+        
+        <div class="video-section" style="margin-top: 25px;">
+            <h3>推荐纪录片</h3>
+            <div class="video-grid">
+                <div>
+                    <a href="https://search.bilibili.com/all?keyword=凌探未来 B站纪录片 新能源" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                        <div class="card" style="border-left: 4px solid #8e44ad;">
+                            <div class="card-icon">&#127968;</div>
+                            <h3>《凌探未来》</h3>
+                            <p>Discovery联合出品的公益纪录片，张凌赫探访海上风电、抽水蓄能等新能源一线，B站热播。</p>
+                            <p style="color:#8e44ad; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                        </div>
+                    </a>
+                </div>
+                <div>
+                    <a href="https://search.bilibili.com/all?keyword=零碳之路 B站纪录片 碳中和" target="_blank" style="text-decoration:none; color:inherit; display:block;">
+                        <div class="card" style="border-left: 4px solid #27ae60;">
+                            <div class="card-icon">&#127758;</div>
+                            <h3>《零碳之路》</h3>
+                            <p>国家地理联合出品的纪录片，探访中国在能源、建筑、交通等领域的绿色低碳实践。</p>
+                            <p style="color:#27ae60; margin-top:10px; font-weight:bold;">→ 点击在B站观看</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="tip-box">
+            <p><strong>如果想嵌入具体的B站视频到网页中：</strong>
+            <br>1) 在 <a href="https://www.bilibili.com" target="_blank" style="color:#856404;">bilibili.com</a> 搜索上述关键词，找到喜欢的视频；
+            <br>2) 点击视频下方的"分享"按钮 → 选择"嵌入代码"；
+            <br>3) 复制代码中的 iframe 标签，替换网页中对应的链接即可实现嵌入式播放。
+            </p>
+        </div>
+    </section>
+
+    <!-- 总结启示 -->
+    <section id="summary" class="section animate">
+        <h2 class="section-title">总结与启示</h2>
+        
+        <h3 style="color: #1a5276; margin: 20px 0 12px;">核心结论</h3>
+        <ol style="padding-left: 20px; margin-bottom: 20px;">
+            <li style="margin-bottom: 10px;"><strong>技术层面：</strong>光伏、风电、储能、氢能四大技术路线已形成互补协同格局。光伏和风电负责"发电"，储能负责"调峰"，氢能负责"跨季节储能和深度脱碳"，三者共同构成未来清洁能源体系的技术支柱。</li>
+            <li style="margin-bottom: 10px;"><strong>电网层面：</strong>新型电力系统正在从"源随荷动"转向"源网荷储协同互动"。智能电网、虚拟电厂、分布式能源并网等技术是实现这一转型的关键支撑。</li>
+            <li style="margin-bottom: 10px;"><strong>产业层面：</strong>中国新能源产业已从"跟跑"进入"并跑"甚至"领跑"阶段。光伏、风电、储能产业链具备全球竞争优势，氢能产业正处于从示范走向商业化的关键拐点。</li>
+            <li style="margin-bottom: 10px;"><strong>社会层面：</strong>能源转型不仅是技术变革，更是生产方式和生活方式的深刻变革。"双碳"目标引领下，居民将从被动用电者变为主动的"产消者"，参与能源生产和消费的新范式。</li>
+        </ol>
+        
+        <h3 style="color: #1a5276; margin: 20px 0 12px;">对电气工程专业的启示</h3>
+        <p>通过本次研究，我们深刻认识到电气工程在能源转型中的核心地位。从发电端的逆变器设计、到电网端的智能调度算法、再到用户端的储能系统集成，电气工程技术贯穿能源生产、传输、消费全链条。作为电气工程专业的学生，我们应当：</p>
+        <ul style="padding-left: 20px;">
+            <li style="margin-bottom: 8px;">夯实电路原理、电力系统分析、电力电子技术等专业基础</li>
+            <li style="margin-bottom: 8px;">关注新能源并网、储能技术、智能电网等前沿方向</li>
+            <li style="margin-bottom: 8px;">培养跨学科思维，将电气工程与信息技术、人工智能等融合</li>
+            <li style="margin-bottom: 8px;">树立能源安全和可持续发展的全局观</li>
+        </ul>
+    </section>
+
+    <!-- 参考文献 -->
+    <section class="section animate">
+        <h2 class="section-title">参考文献</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 50px;">序号</th>
+                        <th>文献类型</th>
+                        <th>标题/来源</th>
+                        <th>作者/机构</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>政策文件</td><td>《2030年前碳达峰行动方案》</td><td>国务院</td></tr>
+                    <tr><td>2</td><td>行业报告</td><td>《中国可再生能源发展报告2024》</td><td>中国可再生能源学会</td></tr>
+                    <tr><td>3</td><td>学术论文</td><td>新型电力系统下新能源并网稳定性研究综述</td><td>中国电机工程学报</td></tr>
+                    <tr><td>4</td><td>行业报告</td><td>《全球能源转型报告》</td><td>国际能源署（IEA）</td></tr>
+                    <tr><td>5</td><td>技术标准</td><td>GB/T 19964-2024 光伏发电站接入电力系统技术规定</td><td>国家能源局</td></tr>
+                    <tr><td>6</td><td>纪录片</td><td>《凌探未来》（B站纪录片）</td><td>华纳兄弟探索集团</td></tr>
+                    <tr><td>7</td><td>科普文章</td><td>《你家屋顶的太阳能板，发出来的电去哪了？》</td><td>科普中国</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- 组员分工 -->
+    <section class="section animate">
+        <h2 class="section-title">组员分工</h2>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width: 40px;">序号</th>
+                        <th>组员姓名</th>
+                        <th>负责研究角度</th>
+                        <th>核心任务内容</th>
+                        <th>完成时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>1</td><td>王镇</td><td>技术维度</td><td>光伏、风电、储能、氢能电气转化原理与核心设备研究</td><td>2026年10月17日</td></tr>
+                    <tr><td>2</td><td>王镇</td><td>电网维度</td><td>智能电网架构设计、分布式能源并网技术研究</td><td>2026年10月17日</td></tr>
+                    <tr><td>3</td><td>王镇</td><td>产业维度</td><td>能源电气装备产业升级路径与融合发展研究</td><td>2026年10月17日</td></tr>
+                    <tr><td>4</td><td>王镇</td><td>社会维度</td><td>双碳目标支撑作用、居民用电变革及电气安全保障研究</td><td>2026年10月17日</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <p style="margin-top: 12px; color: #888; font-size: 13px;">注：请各组根据实际情况填写组员姓名。</p>
+    </section>
+
+</div>
+
+<footer class="footer">
+    <p>《电气工程导论》结课报告 · 未来能源发展</p>
+    <p style="margin-top: 8px;">本页面为课程作业展示用途，内容仅供参考</p>
+</footer>
+
+<script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -50px 0px' };
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.section').forEach(section => {
+        section.style.opacity = '0';
+        section.style.transform = 'translateY(25px)';
+        section.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+        observer.observe(section);
+    });
+</script>
+
+</body>
+</html>
